@@ -19,10 +19,13 @@ type
     DBGrid1: TDBGrid;
     procedure RgPesqProdutoClick(Sender: TObject);
     procedure BtnPesqProdutoClick(Sender: TObject);
+    procedure BtnSelecProdutoClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    FrmIdProduto : integer;
+    FrmDescricaoProduto : String;
   end;
 
 var
@@ -79,6 +82,18 @@ begin
   end;
 
   DBGrid1.DataSource := dmProduto.DsPesqProduto;
+end;
+
+procedure TFormPesqProduto.BtnSelecProdutoClick(Sender: TObject);
+begin
+  FrmIdProduto := 0;
+  FrmDescricaoProduto := '';
+  if not dmProduto.qPesqProduto.IsEmpty then
+  begin
+    FrmIdProduto := dmProduto.qPesqProdutoCOD_PRODUTO.AsInteger;
+    FrmDescricaoProduto := dmProduto.qPesqProdutoDESCRICAO_COMERCIAL.AsString;
+  end;
+  Self.Close;
 end;
 
 procedure TFormPesqProduto.RgPesqProdutoClick(Sender: TObject);

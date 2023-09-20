@@ -13,7 +13,7 @@ type
     edt_desc_compra: TLabeledEdit;
     edt_Unidade: TLabeledEdit;
     edt_Valor: TLabeledEdit;
-    edt_Estoque: TLabeledEdit;
+    edt_QtdEstoque: TLabeledEdit;
     Panel1: TPanel;
     btn_excluir: TButton;
     btn_incluir: TButton;
@@ -32,6 +32,8 @@ type
   private
     { Private declarations }
     Produto : TProduto;
+
+    procedure PesquisarId;
   public
     { Public declarations }
   end;
@@ -96,7 +98,7 @@ begin
   Produto.DESCCOMPRA := UpperCase(edt_desc_compra.Text);
   Produto.UNIDADE := UpperCase(edt_Unidade.Text);
   Produto.VALOR := StrToFloat(edt_Valor.Text);
-  Produto.QUANTIDADE := StrToFloat(edt_Estoque.Text);
+  Produto.QUANTIDADE := StrToFloat(edt_QtdEstoque.Text);
 
   if edt_desc_comercial.Text = '' then
   begin
@@ -122,7 +124,7 @@ begin
     abort
   end;
 
-  if edt_Estoque.Text = '' then
+  if edt_QtdEstoque.Text = '' then
   begin
     Application.MessageBox('Você deve preencher a Quantidade do Estoque', 'Aviso', MB_ICONEXCLAMATION+MB_OK);
     abort
@@ -148,14 +150,43 @@ procedure TfrmCadProduto.LimparForm;
 begin
   edt_desc_comercial.Clear;
   edt_desc_compra.Clear;
-  edt_Estoque.Clear;
+  edt_QtdEstoque.Clear;
   edt_Unidade.Clear;
   edt_Valor.Clear;
+end;
+
+procedure TfrmCadProduto.PesquisarId;
+begin
+  if edt_CodProduto.Text <> '' then
+  begin
+    Produto := TProduto.Create;
+    Produto.COD_PRODUTO := StrToInt(edt_CodProduto.Text);
+
+    if Produto.PesquisarId then
+    begin
+      edt_desc_comercial.Text := Produto.DESCCOMERCIAL;
+      edt_desc_compra.Text := Produto.DESCCOMPRA;
+      edt_Unidade.Text := Produto.UNIDADE;
+      edt_Valor.Text := FloatToStr(Produto.VALOR);
+      edt_QtdEstoque.Text := FloatToStr(Produto.QUANTIDADE);
+    end
+    else
+      ShowMessage('Produto não localizado! ');
+
+    Produto.Free;
+  end;
+
 end;
 
 procedure TfrmCadProduto.SpeedButton1Click(Sender: TObject);
 begin
   FormPesqProduto.ShowModal;
+  if FormPesqProduto.FrmIdProduto > 0 then
+  begin
+    edt_CodProduto.Text := IntToStr(FormPesqProduto.FrmIdProduto);
+    PesquisarId;
+  end;
+
 end;
 
 end.

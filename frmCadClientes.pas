@@ -21,9 +21,9 @@ type
     ComboBoxSexo: TComboBox;
     LblSexo: TLabel;
     LblUF: TLabel;
-    DBLookupComboBoxUF: TDBLookupComboBox;
     Edt_CodUf: TEdit;
     SpeedButton1: TSpeedButton;
+    DBLookupComboBoxUF: TDBLookupComboBox;
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
@@ -46,7 +46,7 @@ var
 
 implementation
 
-uses UPesqClientes, uDmEstados;
+uses UPesqClientes, uDmEstados, uDmClientes;
 
 {$R *.dfm}
 

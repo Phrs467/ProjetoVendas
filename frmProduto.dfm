@@ -98,7 +98,7 @@ object frmCadProduto: TfrmCadProduto
     EditLabel.Caption = 'Valor de Venda'
     TabOrder = 3
   end
-  object edt_Estoque: TLabeledEdit
+  object edt_QtdEstoque: TLabeledEdit
     Left = 24
     Top = 272
     Width = 121

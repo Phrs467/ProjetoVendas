@@ -163,21 +163,22 @@ object FrmClientes: TFrmClientes
       'M'
       'F')
   end
-  object DBLookupComboBoxUF: TDBLookupComboBox
-    Left = 70
-    Top = 192
-    Width = 145
-    Height = 21
-    KeyField = 'COD_UF'
-    ListField = 'SIGLA'
-    ListSource = DmEstados.dsEstados
-    TabOrder = 5
-  end
   object Edt_CodUf: TEdit
     Left = 32
     Top = 192
     Width = 32
     Height = 21
+    TabOrder = 5
+  end
+  object DBLookupComboBoxUF: TDBLookupComboBox
+    Left = 79
+    Top = 192
+    Width = 145
+    Height = 21
+    DataField = 'COD_UF'
+    KeyField = 'COD_UF'
+    ListField = 'SIGLA'
+    ListSource = DmEstados.dsEstados
     TabOrder = 6
   end
 end

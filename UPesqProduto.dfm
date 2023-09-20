@@ -65,6 +65,7 @@ object FormPesqProduto: TFormPesqProduto
       Height = 21
       Caption = 'Selecionar'
       TabOrder = 3
+      OnClick = BtnSelecProdutoClick
     end
   end
   object Panel2: TPanel

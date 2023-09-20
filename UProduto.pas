@@ -23,12 +23,13 @@ type
     Function Editar : Boolean;
     Function Excluir : Boolean;
     Function Cancelar : Boolean;
+    Function PesquisarId : Boolean;
   end;
 
 implementation
 
 uses
-  uDmConexao, SysUtils;
+  uDmConexao,uDmProduto , SysUtils;
 
 { TProduto }
 
@@ -82,6 +83,43 @@ begin
   uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('COD_PRODUTO').Value := Self.COD_PRODUTO;
 
   uDmConexao.DataModule1.ADOQuery1.ExecSQL;
+end;
+
+function TProduto.PesquisarId: Boolean;
+var
+  sql : string;
+begin
+  Result:= true;
+  TRY
+    sql :=
+    '  select       '+
+    '     *         '+
+    '  from Produto ';
+
+    sql := sql + 'where COD_PRODUTO = :COD_PRODUTO   ';
+
+    dmProduto.qPesqProduto.Close;
+    dmProduto.qPesqProduto.SQL.Text := sql;
+    dmProduto.qPesqProduto.Parameters.ParamByName('COD_PRODUTO').Value := Self.COD_PRODUTO;
+    dmProduto.qPesqProduto.Open;
+
+    Result := not dmProduto.qPesqProduto.IsEmpty;
+
+    if Result then
+    begin
+      Self.DESCCOMERCIAL := dmProduto.qPesqProduto.FieldByName('DESCRICAO_COMERCIAL').AsString;
+      Self.DESCCOMPRA := dmProduto.qPesqProduto.FieldByName('DESCRICAO_COMPRA').AsString;
+      Self.UNIDADE := dmProduto.qPesqProduto.FieldByName('UNIDADE_PRODUTO').AsString;
+      Self.VALOR := dmProduto.qPesqProduto.FieldByName('VALOR_VENDA').AsFloat;
+      Self.QUANTIDADE := dmProduto.qPesqProduto.FieldByName('QUANTIDADE_ESTOQUE').AsInteger;
+    end;
+
+  except on E: Exception do
+    begin
+      Result := False;
+      raise Exception.Create(E.Message);
+    end;
+  end;
 end;
 
 function TProduto.Salvar: Boolean;

@@ -1,0 +1,94 @@
+unit UPesqProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TFormPesqProduto = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    RgPesqProduto: TRadioGroup;
+    EdtPesqProduto: TEdit;
+    BtnPesqProduto: TButton;
+    BtnSelecProduto: TButton;
+    LblPesqProduto: TLabel;
+    DBGrid1: TDBGrid;
+    procedure RgPesqProdutoClick(Sender: TObject);
+    procedure BtnPesqProdutoClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormPesqProduto: TFormPesqProduto;
+
+implementation
+
+uses
+  uDmProduto;
+
+{$R *.dfm}
+
+procedure TFormPesqProduto.BtnPesqProdutoClick(Sender: TObject);
+var
+  sql : string;
+begin
+  sql := 'SELECT * FROM Produto ';
+
+  if RgPesqProduto.ItemIndex = 0 then
+  begin
+    if EdtPesqProduto.Text = '' then
+    begin
+      dmProduto.qPesqProduto.Close;
+      dmProduto.qPesqProduto.SQL.Text := sql;
+      dmProduto.qPesqProduto.Open;
+    end
+    else
+    begin
+      sql := sql + ' WHERE COD_PRODUTO = :COD_PRODUTO';
+
+      dmProduto.qPesqProduto.Close;
+      dmProduto.qPesqProduto.SQL.Text := sql;
+      dmProduto.qPesqProduto.Parameters.ParamByName('COD_PRODUTO').Value := EdtPesqProduto.Text;
+      dmProduto.qPesqProduto.Open;
+    end;
+  end;
+
+  if RgPesqProduto.ItemIndex = 1 then
+  begin
+    if EdtPesqProduto.Text = '' then
+    begin
+      dmProduto.qPesqProduto.Close;
+      dmProduto.qPesqProduto.SQL.Text := sql;
+      dmProduto.qPesqProduto.Open;
+    end
+    else
+    begin
+      sql := sql + 'WHERE DESCRICAO_COMERCIAL LIKE ''%' + EdtPesqProduto.Text + '%''';
+
+      dmProduto.qPesqProduto.Close;
+      dmProduto.qPesqProduto.SQL.Text := sql;
+      dmProduto.qPesqProduto.Open;
+    end;
+  end;
+
+  DBGrid1.DataSource := dmProduto.DsPesqProduto;
+end;
+
+procedure TFormPesqProduto.RgPesqProdutoClick(Sender: TObject);
+begin
+  if RgPesqProduto.ItemIndex = 0 then
+    LblPesqProduto.Caption := 'Pesquisar por ID:';
+
+  if RgPesqProduto.ItemIndex = 1 then
+    LblPesqProduto.Caption := 'Pesquisar por Descrição:'
+
+end;
+
+end.

@@ -9,13 +9,13 @@ object DataModule1: TDataModule1
       ';User ID=sa;Initial Catalog=FORCA_VENDAS;Data Source=DESENV5'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
-    Left = 32
+    Left = 136
     Top = 40
   end
   object ADOQuery1: TADOQuery
     Connection = Conexao
     Parameters = <>
-    Left = 32
+    Left = 136
     Top = 104
   end
 end
