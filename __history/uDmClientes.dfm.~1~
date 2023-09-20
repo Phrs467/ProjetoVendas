@@ -1,0 +1,5 @@
+object dmClientes: TdmClientes
+  OldCreateOrder = False
+  Height = 248
+  Width = 411
+end

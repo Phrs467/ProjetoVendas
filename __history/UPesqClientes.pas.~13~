@@ -1,0 +1,92 @@
+unit UPesqClientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
+  Vcl.Grids, Vcl.DBGrids;
+
+type
+  TFormPesqClientes = class(TForm)
+    Panel1: TPanel;
+    btnPesqClientes: TButton;
+    RgPesqClientes: TRadioGroup;
+    EdtPesqClientes: TEdit;
+    Label1: TLabel;
+    Button2: TButton;
+    DBGrid1: TDBGrid;
+    Panel2: TPanel;
+    procedure btnPesqClientesClick(Sender: TObject);
+    procedure RgPesqClientesClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormPesqClientes: TFormPesqClientes;
+
+implementation
+
+uses
+  uDmConexao;
+
+{$R *.dfm}
+
+procedure TFormPesqClientes.btnPesqClientesClick(Sender: TObject);
+var
+  sql : string;
+begin
+  sql :=
+  'select                       '+
+  '  Cli.COD_CLIENTE,           '+
+  '  Cli.NOME_CLIENTE,          '+
+  '  Cli.IDADE,                 '+
+  '  Cli.SEXO,                  '+
+  '  uf.COD_UF,                 '+
+  '  uf.SIGLA                   '+
+  'from Clientes Cli            '+
+  'inner join UF uf on uf.COD_UF  = Cli.UF ';
+
+  if RgPesqClientes.ItemIndex = 0 then
+  begin
+    if EdtPesqClientes.Text <> '' then
+    begin
+      sql := sql + ' where Cli.COD_CLIENTE = :COD_CLIENTE';
+
+      DataModule1.qPesqClientes.Close;
+      DataModule1.qPesqClientes.SQL.Text := sql;
+      DataModule1.qPesqClientes.Parameters.ParamByName('COD_CLIENTE').Value := EdtPesqClientes.Text;
+      DataModule1.qPesqClientes.Open;
+    end;
+  end;
+
+  if RgPesqClientes.ItemIndex = 1 then
+  begin
+    if EdtPesqClientes.Text <> '' then
+    begin
+      sql := sql + ' where NOME_CLIENTE like ''%' + EdtPesqClientes.Text + '%''';
+
+      DataModule1.qPesqClientes.Close;
+      DataModule1.qPesqClientes.SQL.Text := sql;
+      DataModule1.qPesqClientes.Open;
+    end;
+  end;
+end;
+
+procedure TFormPesqClientes.RgPesqClientesClick(Sender: TObject);
+begin
+  if RgPesqClientes.ItemIndex = 0 then
+  begin
+    Label1.Caption := 'Digite o ID:';
+  end;
+
+  if RgPesqClientes.ItemIndex = 1 then
+  begin
+    Label1.Caption := 'Digite o nome:';
+  end;
+end;
+
+end.

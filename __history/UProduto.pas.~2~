@@ -1,0 +1,28 @@
+unit UProduto;
+
+interface
+
+type
+  TProduto = class
+  private
+    FCOD_PRODUTO : Integer;
+    FDESCCOMERCIAL : string;
+    FDESCCOMPRA : string;
+    FUNIDADE : string;
+    FVALOR : Double;
+    FQUANTIDADE : Double;
+  public
+    property COD_PRODUTO : Integer READ FCOD_PRODUTO WRITE FCOD_PRODUTO;
+    property DESCCOMERCIAL : string READ FDESCCOMERCIAL WRITE FDESCCOMERCIAL;
+    property DESCCOMPRA : string READ FDESCCOMPRA WRITE FDESCCOMPRA;
+    property UNIDADE : string READ FUNIDADE WRITE FUNIDADE;
+    property VALOR : Double READ FVALOR WRITE FVALOR;
+    property QUANTIDADE : Double READ FQUANTIDADE WRITE FQUANTIDADE;
+  end;
+
+implementation
+
+uses
+  uDmConexao, SysUtils;
+
+end.

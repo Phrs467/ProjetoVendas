@@ -1,0 +1,163 @@
+unit frmTabEstados;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, MemDS, DBAccess, VirtualQuery, uDmConexao,
+  Vcl.StdCtrls, Vcl.ExtCtrls, UTabEstados, Vcl.Buttons;
+
+type
+  TFrmEstados = class(TForm)
+    edt_sigla: TLabeledEdit;
+    btn_incluir: TButton;
+    btn_salvar: TButton;
+    btn_excluir: TButton;
+    btn_pesquisar: TButton;
+    Panel1: TPanel;
+    edt_descricao: TLabeledEdit;
+    edt_aliq: TLabeledEdit;
+    btn_cancelar: TButton;
+    edt_CodUf: TLabeledEdit;
+    SpeedButton1: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btn_incluirClick(Sender: TObject);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure btn_pesquisarClick(Sender: TObject);
+    procedure btn_excluirClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure LimparForm;
+  private
+    { Private declarations }
+    TabEstados : TTabEstados;
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmEstados: TFrmEstados;
+
+implementation
+
+{$R *.dfm}
+
+uses frmPesquisaGeral;
+
+procedure TFrmEstados.btn_cancelarClick(Sender: TObject);
+begin
+  TabEstados := TTabEstados.Create;
+
+  TabEstados.Cancelar;
+  btn_pesquisar.Click;
+
+  TabEstados.Free;
+end;
+
+procedure TFrmEstados.btn_excluirClick(Sender: TObject);
+begin
+  TabEstados := TTabEstados.Create;
+
+  TabEstados.COD_UF := StrToInt(edt_CodUf.Text);
+
+  if Application.MessageBox('Você deseja excluir o registro? ', 'Aviso',
+    MB_ICONQUESTION+MB_YESNO) = mrYes then
+  begin
+    TabEstados.Excluir;
+    TabEstados.Free;
+  end
+  else
+    Exit;
+
+  LimparForm;
+end;
+
+procedure TFrmEstados.btn_incluirClick(Sender: TObject);
+begin
+  if (edt_sigla.Text <> '') or (edt_descricao.Text <> '') or (edt_aliq.Text <> '') then
+  begin
+    if Application.MessageBox('Você deseja limpar os dados preenchidos? ', 'Aviso',
+    MB_ICONQUESTION+MB_YESNO) = mrNo then
+    Exit;
+  end;
+
+  LimparForm;
+end;
+
+procedure TFrmEstados.btn_pesquisarClick(Sender: TObject);
+begin
+  frmPesqGeral.Close;
+  uDmConexao.DataModule1.ADOQuery1.Close;
+  uDmConexao.DataModule1.ADOQuery1.Open;
+  frmPesqGeral.Show;
+  FrmEstados.Close;
+end;
+
+procedure TFrmEstados.btn_salvarClick(Sender: TObject);
+var
+  cod : String;
+begin
+  TabEstados := TTabEstados.Create;
+
+
+  TabEstados.SIGLA := UpperCase(edt_sigla.Text);
+  TabEstados.DESCRICAO := UpperCase(edt_descricao.Text);
+  TabEstados.VL_ALIQ_UF := StrToFloat(edt_aliq.Text);
+
+  if edt_sigla.Text = '' then
+  begin
+    Application.MessageBox('Você deve preencher a Sigla' , 'Aviso', MB_ICONEXCLAMATION+MB_OK);
+    Abort
+  end;
+
+  if edt_descricao.Text = '' then
+  begin
+    Application.MessageBox('Você deve preencher a Descrição', 'Aviso', MB_ICONEXCLAMATION+MB_OK);
+    abort
+  end;
+
+  if edt_aliq.Text = '' then
+  begin
+    Application.MessageBox('Você deve preencher o Valor da alíquota', 'Aviso', MB_ICONEXCLAMATION+MB_OK);
+    abort
+  end;
+
+
+  if edt_CodUf.Text <> '' then
+  begin
+    TabEstados.COD_UF := StrToInt(edt_CodUf.Text);
+    TabEstados.Editar
+  end
+  else
+    TabEstados.Salvar;
+
+  TabEstados.Free;
+end;
+
+procedure TFrmEstados.FormCreate(Sender: TObject);
+begin
+  if frmPesqGeral.SPK <> '' then
+  begin
+    uDmConexao.DataModule1.ADOQuery1.Close;
+    uDmConexao.DataModule1.ADOQuery1.SQL.Clear;
+    uDmConexao.DataModule1.ADOQuery1.SQL.Text := 'SELECT * FROM UF WHERE COD_UF = '''+
+    frmPesqGeral.SPK +''' ';
+    uDmConexao.DataModule1.ADOQuery1.Active := True;
+
+    Self.Caption := Self.Caption + ' - Estado: '+ DataModule1.ADOQuery1.FieldByName('COD_UF').AsString;
+    edt_CodUf.Text := DataModule1.ADOQuery1.FieldByName('COD_UF').AsString;
+    edt_sigla.Text := DataModule1.ADOQuery1.FieldByName('SIGLA').AsString;
+    edt_descricao.Text := DataModule1.ADOQuery1.FieldByName('DESCRICAO').AsString;
+    edt_aliq.Text := DataModule1.ADOQuery1.FieldByName('VL_ALIQ_UF').AsString;
+    uDmConexao.DataModule1.ADOQuery1.Open;
+  end;
+end;
+
+procedure TFrmEstados.LimparForm;
+begin
+  edt_CodUf.Clear;
+  edt_sigla.Clear;
+  edt_descricao.Clear;
+  edt_aliq.Clear;
+end;
+
+end.

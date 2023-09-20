@@ -1,0 +1,25 @@
+unit UCadClientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, frmTabUsuario, Vcl.StdCtrls,
+  Vcl.ExtCtrls;
+
+type
+  TFrmUsuario1 = class(TFrmUsuario)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmUsuario1: TFrmUsuario1;
+
+implementation
+
+{$R *.dfm}
+
+end.

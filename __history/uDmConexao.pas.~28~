@@ -1,0 +1,70 @@
+unit uDmConexao;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, Data.Win.ADODB, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
+  FireDAC.VCLUI.Wait, FireDAC.Comp.Client;
+
+type
+  TDataModule1 = class(TDataModule)
+    Conexao: TADOConnection;
+    ADOQuery1: TADOQuery;
+    qEstados: TADOQuery;
+    dsEstados: TDataSource;
+    DsPesqUsuario: TDataSource;
+    qPesqUsuario: TADOQuery;
+    DsPesqClientes: TDataSource;
+    qPesqClientes: TADOQuery;
+    DsPesqEstados: TDataSource;
+    qPesqEstados: TADOQuery;
+    DsPesqProduto: TDataSource;
+    qPesqProduto: TADOQuery;
+    qPesqUsuarioCD_USU: TIntegerField;
+    qPesqUsuarioNOME_USU: TStringField;
+    qPesqUsuarioLOGIN_USU: TStringField;
+    qPesqUsuarioSENHA_USU: TStringField;
+    qPesqClientesCOD_CLIENTE: TIntegerField;
+    qPesqClientesNOME_CLIENTE: TStringField;
+    qPesqClientesIDADE: TIntegerField;
+    qPesqClientesSEXO: TStringField;
+    qPesqClientesCOD_UF: TIntegerField;
+    qPesqEstadosCOD_UF: TIntegerField;
+    qPesqEstadosSIGLA: TStringField;
+    qPesqEstadosDESCRICAO: TStringField;
+    qPesqEstadosVL_ALIQ_UF: TBCDField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    ID_Logado : String;
+    Usuario_Logado : string;
+    function bconectar(): Boolean;
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TDataModule1 }
+
+function TDataModule1.bconectar: Boolean;
+begin
+  try
+    Conexao.Connected := True;
+    if Conexao.Connected = true then
+      Result := True;
+  except
+    Result := False
+  end;
+
+end;
+
+end.

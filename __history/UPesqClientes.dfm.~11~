@@ -1,0 +1,166 @@
+object FormPesqClientes: TFormPesqClientes
+  Left = 0
+  Top = 0
+  Caption = 'Pesquisa Clientes'
+  ClientHeight = 462
+  ClientWidth = 771
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 67
+    Width = 771
+    Height = 395
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 56
+    ExplicitTop = 153
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object DBGrid1: TDBGrid
+      Left = 8
+      Top = 6
+      Width = 753
+      Height = 379
+      DataSource = DataModule1.DsPesqClientes
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'COD_CLIENTE'
+          Title.Caption = 'ID'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME_CLIENTE'
+          Title.Caption = 'Nome'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 196
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IDADE'
+          Title.Caption = 'Idade'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SEXO'
+          Title.Caption = 'Sexo'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COD_UF'
+          Title.Caption = 'ID Uf'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SIGLA'
+          Title.Caption = 'Sigla Estado'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 74
+          Visible = True
+        end>
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 771
+    Height = 67
+    Align = alTop
+    TabOrder = 1
+    ExplicitWidth = 773
+    object Label1: TLabel
+      Left = 199
+      Top = 20
+      Width = 99
+      Height = 13
+      Caption = 'Pesquisar por Nome:'
+    end
+    object Button1: TButton
+      Left = 407
+      Top = 34
+      Width = 75
+      Height = 21
+      Caption = 'Pesquisar'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+    object RgPesqClientes: TRadioGroup
+      Left = 8
+      Top = 6
+      Width = 185
+      Height = 49
+      Caption = 'Pesquisar por:'
+      Columns = 2
+      ItemIndex = 1
+      Items.Strings = (
+        'ID'
+        'Nome')
+      TabOrder = 1
+      OnClick = RgPesqClientesClick
+    end
+    object EdtPesqClientes: TEdit
+      Left = 199
+      Top = 34
+      Width = 202
+      Height = 21
+      TabOrder = 2
+    end
+    object Button2: TButton
+      Left = 488
+      Top = 34
+      Width = 75
+      Height = 21
+      Caption = 'Selecionar'
+      TabOrder = 3
+      OnClick = Button1Click
+    end
+  end
+end

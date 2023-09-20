@@ -1,0 +1,76 @@
+unit UPesqProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TFormPesqProduto = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    RgPesqProduto: TRadioGroup;
+    EdtPesqProduto: TEdit;
+    BtnPesqProduto: TButton;
+    BtnSelecProduto: TButton;
+    LblPesqProduto: TLabel;
+    DBGrid1: TDBGrid;
+    procedure RgPesqProdutoClick(Sender: TObject);
+    procedure BtnPesqProdutoClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormPesqProduto: TFormPesqProduto;
+
+implementation
+
+uses
+  uDmConexao;
+
+{$R *.dfm}
+
+procedure TFormPesqProduto.BtnPesqProdutoClick(Sender: TObject);
+var
+  sql : string;
+begin
+  sql := 'SELECT * FROM Produto';
+
+  if RgPesqProduto.ItemIndex = 0 then
+  begin
+    sql := sql + 'WHERE COD_PRODUTO = :COD_PRODUTO';
+
+    DataModule1.qPesqProduto.Close;
+    DataModule1.qPesqProduto.SQL.Text := sql;
+    DataModule1.qPesqProduto.Parameters.ParamByName('COD_PRODUTO').Value := EdtPesqProduto.Text;
+    DataModule1.qPesqProduto.Open;
+  end;
+
+  if RgPesqProduto.ItemIndex = 1 then
+  begin
+    sql := sql + 'WHERE DESCRICAO_COMERCIAL LIKE ''%' + EdtPesqProduto.Text + '%''';
+
+    DataModule1.qPesqProduto.Close;
+    DataModule1.qPesqProduto.SQL.Text := sql;
+    DataModule1.qPesqProduto.Open;
+  end;
+
+  DBGrid1.DataSource := DataModule1.DsPesqProduto;
+end;
+
+procedure TFormPesqProduto.RgPesqProdutoClick(Sender: TObject);
+begin
+  if RgPesqProduto.ItemIndex = 0 then
+    LblPesqProduto.Caption := 'Pesquisar por ID:';
+
+  if RgPesqProduto.ItemIndex = 1 then
+    LblPesqProduto.Caption := 'Pesquisar por Descrição:'
+
+end;
+
+end.

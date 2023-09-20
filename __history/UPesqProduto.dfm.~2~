@@ -1,0 +1,92 @@
+object Form3: TForm3
+  Left = 0
+  Top = 0
+  Caption = 'Pesquisa de Produto'
+  ClientHeight = 420
+  ClientWidth = 695
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 695
+    Height = 67
+    Align = alTop
+    TabOrder = 0
+    object LblPesqProduto: TLabel
+      Left = 199
+      Top = 18
+      Width = 118
+      Height = 13
+      Caption = 'Pesquisar por Descri'#231#227'o:'
+    end
+    object RgPesqProduto: TRadioGroup
+      Left = 8
+      Top = 4
+      Width = 185
+      Height = 49
+      Caption = 'Pesquisar por:'
+      Columns = 2
+      ItemIndex = 1
+      Items.Strings = (
+        'ID'
+        'Descri'#231#227'o')
+      TabOrder = 0
+      OnClick = RgPesqProdutoClick
+    end
+    object EdtPesqProduto: TEdit
+      Left = 199
+      Top = 32
+      Width = 186
+      Height = 21
+      TabOrder = 1
+    end
+    object BtnPesqProduto: TButton
+      Left = 391
+      Top = 32
+      Width = 75
+      Height = 21
+      Caption = 'Pesquisar'
+      TabOrder = 2
+    end
+    object BtnSelecProduto: TButton
+      Left = 480
+      Top = 32
+      Width = 75
+      Height = 21
+      Caption = 'Selecionar'
+      TabOrder = 3
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 67
+    Width = 695
+    Height = 353
+    Align = alClient
+    TabOrder = 1
+    ExplicitLeft = 256
+    ExplicitTop = 224
+    ExplicitWidth = 177
+    ExplicitHeight = 81
+    object DBGrid1: TDBGrid
+      Left = 8
+      Top = 6
+      Width = 677
+      Height = 339
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
+  end
+end

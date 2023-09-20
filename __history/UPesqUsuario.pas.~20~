@@ -1,0 +1,110 @@
+unit UPesqUsuario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Data.Win.ADODB, Vcl.Menus, Vcl.ToolWin,
+  Vcl.ActnMan, Vcl.ActnCtrls, Vcl.ActnMenus;
+
+
+type
+  TFormPesqUsuario = class(TForm)
+    Panel1: TPanel;
+    RgPesqUsuario: TRadioGroup;
+    EdtPesqUsuario: TEdit;
+    Label1: TLabel;
+    BtnPesquisar: TButton;
+    BtnSelecionar: TButton;
+    Panel2: TPanel;
+    DBGrid1: TDBGrid;
+    procedure RgPesqUsuarioClick(Sender: TObject);
+    procedure BtnPesquisarClick(Sender: TObject);
+    procedure BtnSelecionarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    FrmNomeUsuario : String;
+    FrmIdUsuario : Integer;
+  end;
+
+var
+  FormPesqUsuario: TFormPesqUsuario;
+
+implementation
+
+uses
+        uDmConexao;
+
+{$R *.dfm}
+
+procedure TFormPesqUsuario.BtnPesquisarClick(Sender: TObject);
+var
+  sql : string;
+begin
+  sql :=
+  '  select             '+
+  '     CD_USU,         '+
+  '     LOGIN_USU,      '+
+  '     NOME_USU,       '+
+  '     SENHA_USU       '+
+  '  from Usuario       ';
+
+  if RgPesqUsuario.ItemIndex = 0 then
+  begin
+    if EdtPesqUsuario.Text <> '' then
+    begin
+      sql := sql + ' where CD_USU = :CD_USU';
+
+      DataModule1.qPesqUsuarioObj.Close;
+      DataModule1.qPesqUsuarioObj.SQL.Text := sql;
+      DataModule1.qPesqUsuarioObj.Parameters.ParamByName('CD_USU').Value := EdtPesqUsuario.Text;
+      DataModule1.qPesqUsuarioObj.Open;
+    end;
+  end;
+
+  if RgPesqUsuario.ItemIndex = 1 then
+  begin
+    if EdtPesqUsuario.Text <> '' then
+    begin
+      sql := sql + ' where NOME_USU like ''%' + EdtPesqUsuario.Text + '%''';
+
+      DataModule1.qPesqUsuarioObj.Close;
+      DataModule1.qPesqUsuarioObj.SQL.Text := sql;
+      DataModule1.qPesqUsuarioObj.Open;
+    end;
+  end;
+
+  DBGrid1.DataSource := DataModule1.DsPesqUsuario;
+end;
+
+procedure TFormPesqUsuario.BtnSelecionarClick(Sender: TObject);
+begin
+  FrmNomeUsuario := '';
+  FrmIdUsuario := 0;
+
+  if not DataModule1.qPesqUsuarioObj.IsEmpty then
+  begin
+    FrmNomeUsuario := DataModule1.qPesqUsuarioObjNOME_USU.AsString;
+    FrmIdUsuario := DataModule1.qPesqUsuarioObjCD_USU.AsInteger;
+  end;
+
+  Self.Close;
+end;
+
+procedure TFormPesqUsuario.RgPesqUsuarioClick(Sender: TObject);
+begin
+  if RgPesqUsuario.ItemIndex = 0 then
+  begin
+    Label1.Caption := 'Digite o ID:';
+  end;
+
+  if RgPesqUsuario.ItemIndex = 1 then
+  begin
+    Label1.Caption := 'Digite o Nome:';
+  end;
+end;
+
+end.

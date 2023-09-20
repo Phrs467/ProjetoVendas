@@ -1,0 +1,91 @@
+unit UPesqEstados;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Data.DB,
+  Vcl.Grids, Vcl.DBGrids;
+
+type
+  TFormPesqEstados = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    RgPesqEstados: TRadioGroup;
+    EdtPesqEstados: TEdit;
+    btnPesqEstados: TButton;
+    BtnSelecionarEstados: TButton;
+    Label1: TLabel;
+    DBGrid1: TDBGrid;
+    procedure RgPesqEstadosClick(Sender: TObject);
+    procedure btnPesqEstadosClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormPesqEstados: TFormPesqEstados;
+
+implementation
+
+uses
+  uDmConexao;
+
+{$R *.dfm}
+
+procedure TFormPesqEstados.btnPesqEstadosClick(Sender: TObject);
+var
+  sql : string;
+begin
+  sql :=
+  'select * from UF'
+
+  if RgPesqEstados.ItemIndex = 0 then
+  begin
+    if EdtPesqEstados.Text <> '' then
+    begin
+      sql := sql + ' where COD_UF = :COD_UF';
+
+      DataModule1.qPesqClientes.Close;
+      DataModule1.qPesqClientes.SQL.Text := sql;
+      DataModule1.qPesqClientes.Parameters.ParamByName('COD_UF').Value := EdtPesqEstados.Text;
+      DataModule1.qPesqClientes.Open;
+    end;
+  end;
+
+  if RgPesqEstados.ItemIndex = 1 then
+  begin
+    if EdtPesqEstados.Text <> '' then
+    begin
+      sql := sql + ' where DESCRICAO like ''%' + EdtPesqEstados.Text + '%''';
+
+      DataModule1.qPesqClientes.Close;
+      DataModule1.qPesqClientes.SQL.Text := sql;
+      DataModule1.qPesqClientes.Open;
+    end;
+  end;
+  DBGrid1.DataSource := DataModule1.DsPesqEstados;
+
+//  DataModule1.qPesqEstados.Active := False;
+//  DataModule1.qPesqEstados.SQL.Clear;
+//  DataModule1.qPesqEstados.SQL.Add('select * from UF where COD_UF = ' + EdtPesqEstados.Text);
+//  DataModule1.qPesqEstados.Active := True;
+
+end;
+
+procedure TFormPesqEstados.RgPesqEstadosClick(Sender: TObject);
+begin
+  if RgPesqEstados.ItemIndex = 0 then
+  begin
+    Label1.Caption := 'Digite o ID:';
+  end;
+
+  if RgPesqEstados.ItemIndex = 1 then
+  begin
+    Label1.Caption := 'Digite o Descrição:';
+  end;
+end;
+
+end.

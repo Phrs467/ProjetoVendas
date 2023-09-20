@@ -1,0 +1,201 @@
+unit frmCadClientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, uDmConexao, UClientes, UTabEstados,
+  Vcl.DBCtrls, Vcl.Buttons;
+
+type
+  TFrmClientes = class(TForm)
+    Panel1: TPanel;
+    btn_excluir: TButton;
+    btn_incluir: TButton;
+    btn_pesquisar: TButton;
+    btn_salvar: TButton;
+    btn_cancelar: TButton;
+    edt_CodCliente: TLabeledEdit;
+    edt_NomeCliente: TLabeledEdit;
+    edt_Idade: TLabeledEdit;
+    ComboBoxSexo: TComboBox;
+    LblSexo: TLabel;
+    LblUF: TLabel;
+    DBLookupComboBoxUF: TDBLookupComboBox;
+    Edt_CodUf: TEdit;
+    SpeedButton1: TSpeedButton;
+    procedure btn_salvarClick(Sender: TObject);
+    procedure btn_excluirClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_incluirClick(Sender: TObject);
+    Procedure LimparForm;
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+    CadClientes : TCadClientes;
+    TabEstados : TTabEstados;
+
+    Procedure PesquisarId;
+    Procedure PesquisarUf;
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmClientes: TFrmClientes;
+
+implementation
+
+uses UPesqClientes;
+
+{$R *.dfm}
+
+procedure TFrmClientes.btn_cancelarClick(Sender: TObject);
+begin
+  CadClientes := TCadClientes.Create;
+
+  CadClientes.Cancelar;
+  btn_pesquisar.Click;
+
+  CadClientes.Free;
+end;
+
+procedure TFrmClientes.btn_excluirClick(Sender: TObject);
+begin
+  CadClientes := TCadClientes.Create;
+
+  CadClientes.COD_CLIENTE := StrToInt(edt_CodCliente.Text);
+
+  if Application.MessageBox('Você deseja excluir o registro? ', 'Aviso',
+    MB_ICONQUESTION+MB_YESNO) = mrYes then
+  begin
+    CadClientes.Excluir;
+    CadClientes.Free
+  end
+  else
+    Exit;
+  LimparForm;
+end;
+
+procedure TFrmClientes.btn_incluirClick(Sender: TObject);
+begin
+  if (edt_NomeCliente.Text <> '') or (edt_Idade.Text <> '') or (ComboBoxSexo.Text <> '') then
+  begin
+    if Application.MessageBox('Você deseja incluir um novo registro? as alterações realizadas caso não salvar serão perdidas!',
+    'Aviso', MB_ICONQUESTION+MB_YESNO) = mrNo then
+    exit;
+  end;
+  LimparForm;
+  edt_NomeCliente.SetFocus;
+end;
+
+procedure TFrmClientes.btn_salvarClick(Sender: TObject);
+begin
+  CadClientes := TCadClientes.Create;
+
+  CadClientes.NOME_CLIENTE := UpperCase(edt_NomeCliente.Text);
+  CadClientes.IDADE := StrToInt(edt_Idade.Text);
+  CadClientes.SEXO := ComboBoxSexo.Text;
+  CadClientes.COD_UF := DBLookupComboBoxUF.KeyValue;
+  CadClientes.SIGLA := DBLookupComboBoxUF.Text;
+
+
+  if edt_NomeCliente.Text = '' then
+  begin
+    Application.MessageBox('Você deve preencher o Nome' , 'Aviso', MB_ICONEXCLAMATION+MB_OK);
+    Abort
+  end;
+
+  if edt_Idade.Text = '' then
+  begin
+    Application.MessageBox('Você deve preencher a Idade', 'Aviso', MB_ICONEXCLAMATION+MB_OK);
+    abort
+  end;
+
+  if ComboBoxSexo.Text = '' then
+  begin
+    Application.MessageBox('Você deve preencher o Sexo', 'Aviso', MB_ICONEXCLAMATION+MB_OK);
+    abort
+  end;
+
+  if DBLookupComboBoxUF.Text = '' then
+  begin
+    Application.MessageBox('Você deve preencher o UF', 'Aviso', MB_ICONEXCLAMATION+MB_OK);
+    abort
+  end;
+
+  if edt_CodCliente.Text <> '' then
+  begin
+    CadClientes.COD_CLIENTE := StrToInt(edt_CodCliente.Text);
+    CadClientes.Editar;
+  end
+  else
+    CadClientes.Salvar;
+
+  CadClientes.Free;
+end;
+
+procedure TFrmClientes.LimparForm;
+begin
+  edt_CodCliente.Clear;
+  edt_NomeCliente.Clear;
+  edt_Idade.Clear;
+  ComboBoxSexo.Clear;
+  Edt_CodUf.Clear;
+  DBLookupComboBoxUF.KeyValue := null;
+end;
+
+procedure TFrmClientes.PesquisarId;
+begin
+  if edt_CodCliente.Text <> '' then
+  begin
+    CadClientes := TCadClientes.Create;
+    CadClientes.COD_CLIENTE := StrToInt(edt_CodCliente.Text);
+
+    if CadClientes.PesquisarId then
+    begin
+      edt_CodCliente.Text := IntToStr(CadClientes.COD_CLIENTE);
+      edt_NomeCliente.Text := CadClientes.NOME_CLIENTE;
+      edt_Idade.Text := IntToStr(CadClientes.IDADE);
+      ComboBoxSexo.Text := CadClientes.SEXO;
+      Edt_CodUf.Text := IntToStr(CadClientes.COD_UF);
+      if CadClientes.COD_UF > 0 then
+        PesquisarUf;
+
+    end
+    else
+      ShowMessage('Cliente não localizado');
+  end;
+end;
+
+procedure TFrmClientes.PesquisarUf;
+begin
+  if Edt_CodUf.Text <> '' then
+  begin
+    TabEstados := TTabEstados.Create;
+    TabEstados.COD_UF := StrToInt(Edt_CodUf.Text);
+
+    if TabEstados.PesquisarId then
+    begin
+      DBLookupComboBoxUF.Text := TabEstados.SIGLA;
+    end
+    else
+    begin
+      ShowMessage('Estado não localizado!');
+    end;
+
+    TabEstados.Free;
+  end;
+end;
+
+procedure TFrmClientes.SpeedButton1Click(Sender: TObject);
+begin
+  FormPesqClientes.ShowModal;
+  if FormPesqClientes.FrmIdCliente > 0 then
+  begin
+    edt_CodCliente.Text := IntToStr(FormPesqClientes.FrmIdCliente);
+    PesquisarId;
+  end;
+end;
+
+end.

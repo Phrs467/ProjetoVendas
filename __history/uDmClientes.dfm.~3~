@@ -1,0 +1,49 @@
+object dmClientes: TdmClientes
+  OldCreateOrder = False
+  Height = 248
+  Width = 411
+  object DsPesqClientes: TDataSource
+    DataSet = qPesqClientes
+    Left = 104
+    Top = 48
+  end
+  object qPesqClientes: TADOQuery
+    Connection = DataModule1.Conexao
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    Parameters = <>
+    SQL.Strings = (
+      'select '
+      '  Cli.COD_CLIENTE,'
+      '  Cli.NOME_CLIENTE,'
+      '  Cli.IDADE,'
+      '  Cli.SEXO,'
+      '  uf.COD_UF,'
+      '  uf.SIGLA'
+      'from Clientes Cli'
+      'inner join UF uf on uf.COD_UF  = Cli.UF')
+    Left = 104
+    Top = 96
+    object qPesqClientesCOD_CLIENTE: TIntegerField
+      FieldName = 'COD_CLIENTE'
+    end
+    object qPesqClientesNOME_CLIENTE: TStringField
+      FieldName = 'NOME_CLIENTE'
+      Size = 45
+    end
+    object qPesqClientesIDADE: TIntegerField
+      FieldName = 'IDADE'
+    end
+    object qPesqClientesSEXO: TStringField
+      FieldName = 'SEXO'
+      Size = 1
+    end
+    object qPesqClientesCOD_UF: TIntegerField
+      FieldName = 'COD_UF'
+    end
+    object qPesqClientesSIGLA: TStringField
+      FieldName = 'SIGLA'
+      Size = 2
+    end
+  end
+end

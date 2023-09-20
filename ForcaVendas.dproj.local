@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/07/05 09:34:33.000.655,D:\Pedro\Projeto Venda - Udemy\frmLogin.dfm=D:\Pedro\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2023/07/05 09:34:33.000.655,D:\Pedro\Projeto Venda - Udemy\frmLogin.pas=D:\Pedro\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/07/05 09:34:48.000.171,D:\Pedro\Projeto Venda - Udemy\ForcaVendas.dproj=D:\Pedro\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2023/07/05 09:36:44.000.804,D:\Pedro\Projeto Venda - Udemy\frmPrincipal.dfm=D:\Pedro\Projeto Venda - Udemy\Unit2.dfm</Transaction>
+    <Transaction>2023/07/05 09:36:44.000.804,D:\Pedro\Projeto Venda - Udemy\frmPrincipal.pas=D:\Pedro\Projeto Venda - Udemy\Unit2.pas</Transaction>
+    <Transaction>2023/07/05 11:44:32.000.428,D:\Pedro\Projeto Venda - Udemy\uDmConexao.dfm=D:\Pedro\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/07/05 11:44:32.000.428,D:\Pedro\Projeto Venda - Udemy\uDmConexao.pas=D:\Pedro\Projeto Venda - Udemy\Unit1.pas</Transaction>
+    <Transaction>2023/07/08 10:40:55.000.449,D:\Pedro\Projeto Venda - Udemy\Unit1.dfm=D:\Pedro\Projeto Venda - Udemy\frmPesquisaGeral.dfm</Transaction>
+    <Transaction>2023/07/10 08:45:11.000.499,D:\Pedro\Projeto Venda - Udemy\frmTabEstados.pas=D:\Pedro\Projeto Venda - Udemy\Unit1.pas</Transaction>
+    <Transaction>2023/07/10 08:45:11.000.499,D:\Pedro\Projeto Venda - Udemy\frmTabEstados.dfm=D:\Pedro\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/08/01 11:19:30.000.826,D:\Pedro\Projeto Venda - Udemy\frmTabUsuario.pas=D:\Pedro\Projeto Venda - Udemy\Unit2.pas</Transaction>
+    <Transaction>2023/08/01 11:19:30.000.826,D:\Pedro\Projeto Venda - Udemy\frmTabUsuario.dfm=D:\Pedro\Projeto Venda - Udemy\Unit2.dfm</Transaction>
+    <Transaction>2023/08/01 11:20:01.000.667,D:\Pedro\Projeto Venda - Udemy\UTabUsuario.pas=D:\Pedro\Projeto Venda - Udemy\Unit1.pas</Transaction>
+    <Transaction>2023/08/03 08:58:28.000.774,D:\Pedro\Projeto Venda - Udemy\Unit1.dfm=D:\Pedro\Projeto Venda - Udemy\UCadClientes.dfm</Transaction>
+    <Transaction>2023/08/03 09:03:18.000.193,D:\Pedro\Projeto Venda - Udemy\Unit2.dfm=D:\Pedro\Projeto Venda - Udemy\frmCadClientes.dfm</Transaction>
+    <Transaction>2023/08/03 10:19:59.000.162,D:\Pedro\Projeto Venda - Udemy\UClientes.pas=D:\Pedro\Projeto Venda - Udemy\Unit1.pas</Transaction>
+    <Transaction>2023/08/07 14:40:28.000.175,D:\Pedro\Projeto Venda - Udemy\Unit3.dfm=D:\Pedro\Projeto Venda - Udemy\frmProduto.dfm</Transaction>
+    <Transaction>2023/08/08 08:22:28.000.994,D:\Pedro\Projeto Venda - Udemy\UProduto.pas=D:\Pedro\Projeto Venda - Udemy\Unit1.pas</Transaction>
+    <Transaction>2023/08/10 09:03:30.000.010,D:\Pedro\Projeto Venda - Udemy\Unit3.dfm=D:\Pedro\Projeto Venda - Udemy\frmLancPedidos.dfm</Transaction>
+    <Transaction>2023/09/01 17:38:15.000.471,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit3.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\UPesqUsuario.dfm</Transaction>
+    <Transaction>2023/09/04 10:56:02.000.844,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\UPesqClientes.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/09/04 11:10:52.000.658,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\UPesqClientes.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit3.dfm</Transaction>
+    <Transaction>2023/09/04 14:02:41.000.881,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\UPesqEstados.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit3.dfm</Transaction>
+    <Transaction>2023/09/05 08:09:54.000.655,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\UPesqProduto.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit3.dfm</Transaction>
+    <Transaction>2023/09/20 11:18:43.430,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmUsuario.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/09/20 11:22:13.852,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmClientes.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/09/20 11:31:46.211,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmEstados.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/09/20 11:33:52.450,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmProduto.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="frmCadClientes.pas"/>
+    <File Path="frmCadClientes.dfm"/>
+    <File Path="frmLancPedidos.pas"/>
+    <File Path="frmLancPedidos.dfm"/>
+    <File Path="frmLogin.pas"/>
+    <File Path="frmLogin.dfm"/>
+    <File Path="frmPrincipal.pas"/>
+    <File Path="frmPrincipal.dfm"/>
+    <File Path="frmProduto.pas"/>
+    <File Path="frmProduto.dfm"/>
+    <File Path="frmTabEstados.pas"/>
+    <File Path="frmTabEstados.dfm"/>
+    <File Path="frmTabUsuario.pas"/>
+    <File Path="frmTabUsuario.dfm"/>
+    <File Path="UClientes.pas"/>
+    <File Path="uDmConexao.pas"/>
+    <File Path="uDmConexao.dfm"/>
+    <File Path="UProduto.pas"/>
+    <File Path="UTabEstados.pas"/>
+    <File Path="UTabUsuario.pas"/>
+    <File Path="ULancPedido.pas"/>
+    <File Path="UPesqUsuario.pas"/>
+    <File Path="UPesqUsuario.dfm"/>
+    <File Path="UPesqClientes.pas"/>
+    <File Path="UPesqClientes.dfm"/>
+    <File Path="UPesqEstados.pas"/>
+    <File Path="UPesqEstados.dfm"/>
+    <File Path="UPesqProduto.pas"/>
+    <File Path="UPesqProduto.dfm"/>
+    <File Path="uDmUsuario.pas"/>
+    <File Path="uDmUsuario.dfm"/>
+    <File Path="uDmClientes.pas"/>
+    <File Path="uDmClientes.dfm"/>
+    <File Path="uDmEstados.pas"/>
+    <File Path="uDmEstados.dfm"/>
+    <File Path="uDmProduto.pas"/>
+    <File Path="uDmProduto.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

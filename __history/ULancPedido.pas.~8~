@@ -1,0 +1,203 @@
+unit ULancPedido;
+
+interface
+
+type
+  TLancPedido = class
+  private
+    { private declarations }
+    FCOD_PEDIDO : Integer;
+    FNUMERO_PEDIDO_CLIENTE : Integer;
+    FCOD_CLIENTE : Integer;
+    FNOME_CLIENTE : String;
+    FVALOR_PEDIDO : Double;
+    FVALOR_PAGO : Double;
+    FDESCONTO_PAGO : Double;
+    FCOD_USU : Integer;
+
+  public
+    { public declarations }
+    Property COD_PEDIDO : Integer read FCOD_CLIENTE write FCOD_CLIENTE;
+    Property NUMERO_PEDIDO_CLIENTE : Integer READ FNUMERO_PEDIDO_CLIENTE WRITE FNUMERO_PEDIDO_CLIENTE;
+    Property COD_CLIENTE : Integer READ FCOD_CLIENTE WRITE FCOD_CLIENTE;
+    Property NOME_CLIENTE : string READ FNOME_CLIENTE WRITE FNOME_CLIENTE;
+    Property VALOR_PEDIDO : Double READ FVALOR_PEDIDO WRITE FVALOR_PEDIDO;
+    Property VALOR_PAGO : Double READ FVALOR_PAGO WRITE FVALOR_PAGO;
+    Property DESCONTO_PAGO : Double READ FDESCONTO_PAGO WRITE FDESCONTO_PAGO;
+    Property COD_USU : Integer READ FCOD_USU WRITE FCOD_USU;
+
+    Function Salvar : Boolean;
+    Function Editar : Boolean;
+    Function Excluir : Boolean;
+    Function Cancelar : Boolean;
+  end;
+implementation
+
+uses
+  uDmConexao, SysUtils;
+
+{ TLancPedido }
+
+function TLancPedido.Cancelar: Boolean;
+begin
+  uDmConexao.DataModule1.ADOQuery1.Cancel;
+end;
+
+function TLancPedido.Editar: Boolean;
+var
+  sqlUpdate,
+  sqlCampos,
+  sqlWhere : string;
+begin
+  Result:= True;
+
+ try
+   sqlCampos :=
+   '     UPDATE Pedido                                   '+
+   '     set                                             '+
+   '      NUMERO_PEDIDO_CLIENTE = :NUMERO_PEDIDO_CLIENTE ';
+
+   if Self.COD_CLIENTE > 0 then
+     sqlCampos := sqlCampos +
+     '     ,COD_CLIENTE = :COD_CLIENTE                   '
+   else
+     sqlCampos := sqlCampos +
+     '     ,COD_CLIENTE = null                           ';
+
+   sqlCampos := sqlCampos +
+   '     ,NOME_CLIENTE = :NOME_CLIENTE                   '+
+   '     ,VALOR_PEDIDO = :VALOR_PEDIDO                   '+
+   '     ,VALOR_PAGO = :VALOR_PAGO                       '+
+   '     ,DESCONTO_PEDIDO = :DESCONTO_PEDIDO             ';
+
+   if Self.COD_USU > 0 then
+     sqlCampos := sqlCampos +
+     '     ,COD_USU = :COD_USU                           '
+   else
+     sqlCampos := sqlCampos +
+     '     ,COD_USU = null                               ';
+
+   sqlWhere :=
+   '     WHERE COD_PEDIDO = :COD_PEDIDO                  ';
+
+   sqlUpdate := sqlCampos + sqlUpdate;
+
+   uDmConexao.DataModule1.ADOQuery1.Close;
+   uDmConexao.DataModule1.ADOQuery1.SQL.Text := sqlUpdate;
+
+   uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('NUMERO_PEDIDO_CLIENTE').Value := Self.NUMERO_PEDIDO_CLIENTE;
+
+   if Self.COD_CLIENTE > 0 then
+     uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('COD_CLIENTE').Value := Self.COD_CLIENTE;
+
+   uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('NOME_CLIENTE').Value := Self.NOME_CLIENTE;
+   uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('VALOR_PEDIDO').Value := Self.VALOR_PEDIDO;
+   uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('VALOR_PAGO').Value := Self.VALOR_PAGO;
+   uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('DESCONTO_PEDIDO').Value := Self.DESCONTO_PAGO;
+
+   if Self.COD_USU > 0 then
+     uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('COD_USU').Value := Self.COD_USU;
+
+   uDmConexao.DataModule1.ADOQuery1.ExecSQL;
+ except on E: Exception do
+   begin
+     Result := False;
+     raise Exception.Create(E.Message);
+   end;
+  end;
+end;
+
+function TLancPedido.Excluir: Boolean;
+var
+  sql : string;
+begin
+  Result:= True;
+
+  sql :=
+  '     DELETE FROM Pedido              '+
+  '     where COD_PEDIDO = :COD_PEDIDO  ';
+
+  uDmConexao.DataModule1.ADOQuery1.Close;
+  uDmConexao.DataModule1.ADOQuery1.SQL.Text := sql;
+
+  uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('COD_PEDIDO').Value := Self.COD_PEDIDO;
+
+  uDmConexao.DataModule1.ADOQuery1.ExecSQL;
+end;
+
+function TLancPedido.Salvar: Boolean;
+var
+  sqlSalvar, sqlCampos, sqlValues : string;
+begin
+  Result:= True;
+  try
+    sqlCampos:=
+    '     INSERT INTO Pedido              '+
+    '       (                             '+
+    '        NUMERO_PEDIDO_CLIENTE        ';
+
+    if Self.COD_CLIENTE > 0 then
+      sqlCampos := sqlCampos +
+    '       ,COD_CLIENTE                  ';
+
+    sqlCampos := sqlCampos +
+    '       ,NOME_CLIENTE                 '+
+    '       ,VALOR_PEDIDO                 '+
+    '       ,VALOR_PAGO                   '+
+    '       ,DESCONTO_PEDIDO              ';
+
+    if self.COD_USU > 0  then
+      sqlCampos := sqlCampos +
+    '       ,COD_USU                      ';
+
+    sqlCampos := sqlCampos +
+    '        )                            ';
+
+    sqlValues:=
+    '     VALUES(                         '+
+    '       :NUMERO_PEDIDO_CLIENTE        ';
+
+    if Self.COD_CLIENTE > 0 then
+      sqlValues := sqlValues +
+    '      ,:COD_CLIENTE                  ';
+
+    sqlValues := sqlValues +
+    '      ,:NOME_CLIENTE                 '+
+    '      ,:VALOR_PEDIDO                 '+
+    '      ,:VALOR_PAGO                   '+
+    '      ,:DESCONTO_PEDIDO              ';
+
+    if Self.COD_USU > 0 then
+      sqlValues := sqlValues +
+    '      ,:COD_USU                      ';
+
+    sqlValues := sqlValues +
+    '        )                            ';
+
+    sqlSalvar := sqlCampos + sqlValues;
+
+    uDmConexao.DataModule1.ADOQuery1.Close;
+    uDmConexao.DataModule1.ADOQuery1.SQL.Text := sqlSalvar;
+
+    uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('NUMERO_PEDIDO_CLIENTE').Value := Self.NUMERO_PEDIDO_CLIENTE;
+    if Self.COD_CLIENTE > 0 then
+      uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('COD_CLIENTE').Value := Self.COD_CLIENTE;
+
+    uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('NOME_CLIENTE').Value := Self.NOME_CLIENTE;
+    uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('VALOR_PEDIDO').Value := Self.VALOR_PEDIDO;
+    uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('VALOR_PAGO').Value := Self.VALOR_PAGO;
+    uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('DESCONTO_PEDIDO').Value := Self.DESCONTO_PAGO;
+
+    if Self.COD_USU > 0 then
+      uDmConexao.DataModule1.ADOQuery1.Parameters.ParamByName('COD_USU').Value := Self.COD_USU;
+
+    uDmConexao.DataModule1.ADOQuery1.ExecSQL;
+  except on E: Exception do
+    begin
+      Result := False;
+      raise Exception.Create(E.Message);
+    end;
+  end;
+end;
+
+end.

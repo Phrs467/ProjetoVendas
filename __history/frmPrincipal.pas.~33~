@@ -1,0 +1,87 @@
+unit frmPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus,
+  Vcl.ComCtrls, uDmConexao, UPesqUsuario;
+
+type
+  TfrmMenuSistema = class(TForm)
+    MainMenu1: TMainMenu;
+    Cadastro1: TMenuItem;
+    Usurios1: TMenuItem;
+    Clientes1: TMenuItem;
+    Produtos1: TMenuItem;
+    Estados1: TMenuItem;
+    N1: TMenuItem;
+    Sair1: TMenuItem;
+    Vendas1: TMenuItem;
+    FazerPedido1: TMenuItem;
+    StatusBar1: TStatusBar;
+    Pesquisa1: TMenuItem;
+    Usurio1: TMenuItem;
+    Clientes2: TMenuItem;
+    Estados2: TMenuItem;
+    Pesquisar1: TMenuItem;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Sair1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Usurio1Click(Sender: TObject);
+    procedure Clientes2Click(Sender: TObject);
+    procedure Estados2Click(Sender: TObject);
+    procedure Pesquisar1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMenuSistema: TfrmMenuSistema;
+
+implementation
+
+uses
+//  frmCadClientes, UPesqClientes, UPesqEstados, UPesqProduto, UTabUsuario;
+
+{$R *.dfm}
+
+procedure TfrmMenuSistema.Clientes2Click(Sender: TObject);
+begin
+  FormPesqClientes.ShowModal;
+end;
+
+procedure TfrmMenuSistema.Estados2Click(Sender: TObject);
+begin
+  FormPesqEstados.ShowModal;
+end;
+
+procedure TfrmMenuSistema.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmMenuSistema.FormCreate(Sender: TObject);
+begin
+  StatusBar1.Panels[0].Text := StatusBar1.Panels[0].Text + DataModule1.ID_Logado;
+  StatusBar1.Panels[1].Text := DataModule1.Usuario_Logado;
+end;
+
+procedure TfrmMenuSistema.Pesquisar1Click(Sender: TObject);
+begin
+  FormPesqProduto.ShowModal;
+end;
+
+procedure TfrmMenuSistema.Sair1Click(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmMenuSistema.Usurio1Click(Sender: TObject);
+begin
+  FormPesqUsuario.ShowModal;
+end;
+
+end.

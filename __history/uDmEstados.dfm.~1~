@@ -1,0 +1,5 @@
+object DmEstados: TDmEstados
+  OldCreateOrder = False
+  Height = 292
+  Width = 456
+end

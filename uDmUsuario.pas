@@ -1,0 +1,36 @@
+unit uDmUsuario;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, Data.Win.ADODB;
+
+type
+  TdmUsuario = class(TDataModule)
+    DsPesqUsuario: TDataSource;
+    qPesqUsuario: TADOQuery;
+    qPesqUsuarioCD_USU: TIntegerField;
+    qPesqUsuarioNOME_USU: TStringField;
+    qPesqUsuarioLOGIN_USU: TStringField;
+    qPesqUsuarioSENHA_USU: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    ID_Logado : String;
+    Usuario_Logado : string;
+  end;
+
+var
+  dmUsuario: TdmUsuario;
+
+implementation
+
+uses
+  uDmConexao;
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

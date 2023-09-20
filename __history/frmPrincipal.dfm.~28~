@@ -1,0 +1,86 @@
+object frmMenuSistema: TfrmMenuSistema
+  Left = 0
+  Top = 0
+  Caption = 'For'#231'a de vendas'
+  ClientHeight = 299
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poScreenCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 272
+    Width = 635
+    Height = 27
+    Panels = <
+      item
+        Text = 'Vendedor: '
+        Width = 100
+      end
+      item
+        Width = 50
+      end>
+  end
+  object MainMenu1: TMainMenu
+    Left = 40
+    Top = 16
+    object Cadastro1: TMenuItem
+      Caption = 'Cadastro'
+      object Usurios1: TMenuItem
+        Caption = 'Usu'#225'rios'
+      end
+      object Clientes1: TMenuItem
+        Caption = 'Clientes'
+      end
+      object Produtos1: TMenuItem
+        Caption = 'Produtos'
+      end
+      object Estados1: TMenuItem
+        Caption = 'Estados'
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object Sair1: TMenuItem
+        Caption = 'Sair'
+        OnClick = Sair1Click
+      end
+    end
+    object Pesquisa1: TMenuItem
+      Caption = 'Pesquisa'
+      object Usurio1: TMenuItem
+        Caption = 'Usu'#225'rio'
+        OnClick = Usurio1Click
+      end
+      object Clientes2: TMenuItem
+        Caption = 'Clientes'
+        OnClick = Clientes2Click
+      end
+      object Estados2: TMenuItem
+        Caption = 'Estados'
+        OnClick = Estados2Click
+      end
+      object Pesquisar1: TMenuItem
+        Caption = 'Produto'
+        OnClick = Pesquisar1Click
+      end
+    end
+    object Vendas1: TMenuItem
+      Caption = 'Vendas'
+      object FazerPedido1: TMenuItem
+        Caption = 'Lan'#231'amento de Pedidos'
+      end
+    end
+  end
+end

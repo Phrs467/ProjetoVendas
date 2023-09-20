@@ -1,0 +1,5 @@
+inherited FrmUsuario1: TFrmUsuario1
+  Caption = 'FrmUsuario1'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

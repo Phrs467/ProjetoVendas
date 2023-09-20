@@ -1,0 +1,36 @@
+object DataModule1: TDataModule1
+  OldCreateOrder = False
+  Height = 221
+  Width = 307
+  object Conexao: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=saoba123;Persist Security Info=True' +
+      ';User ID=sa;Initial Catalog=FORCA_VENDAS;Data Source=DESENV5'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 32
+    Top = 40
+  end
+  object ADOQuery1: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    Left = 32
+    Top = 104
+  end
+  object DsPesqProduto: TDataSource
+    DataSet = qPesqProduto
+    Left = 104
+    Top = 48
+  end
+  object qPesqProduto: TADOQuery
+    Connection = Conexao
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Produto')
+    Left = 104
+    Top = 96
+  end
+end

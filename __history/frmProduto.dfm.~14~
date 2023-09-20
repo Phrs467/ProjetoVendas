@@ -1,0 +1,131 @@
+object frmCadProduto: TfrmCadProduto
+  Left = 0
+  Top = 0
+  Caption = 'frmCadProduto'
+  ClientHeight = 390
+  ClientWidth = 647
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object edt_desc_comercial: TLabeledEdit
+    Left = 24
+    Top = 80
+    Width = 121
+    Height = 21
+    EditLabel.Width = 95
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Descri'#231#227'o Comercial'
+    TabOrder = 0
+  end
+  object edt_desc_compra: TLabeledEdit
+    Left = 24
+    Top = 128
+    Width = 121
+    Height = 21
+    EditLabel.Width = 91
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Descri'#231#227'o Compras'
+    TabOrder = 1
+  end
+  object edt_Unidade: TLabeledEdit
+    Left = 24
+    Top = 176
+    Width = 121
+    Height = 21
+    EditLabel.Width = 39
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Unidade'
+    TabOrder = 2
+  end
+  object edt_Valor: TLabeledEdit
+    Left = 24
+    Top = 224
+    Width = 121
+    Height = 21
+    EditLabel.Width = 72
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Valor de Venda'
+    TabOrder = 3
+  end
+  object edt_Estoque: TLabeledEdit
+    Left = 24
+    Top = 272
+    Width = 121
+    Height = 21
+    EditLabel.Width = 98
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Quantidade Estoque'
+    TabOrder = 4
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 349
+    Width = 647
+    Height = 41
+    Align = alBottom
+    TabOrder = 5
+    object btn_excluir: TButton
+      Left = 203
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'E&xcluir'
+      TabOrder = 1
+      OnClick = btn_excluirClick
+    end
+    object btn_incluir: TButton
+      Left = 24
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Novo'
+      TabOrder = 0
+      OnClick = btn_incluirClick
+    end
+    object btn_pesquisar: TButton
+      Left = 380
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Pesquisar'
+      TabOrder = 4
+      OnClick = btn_pesquisarClick
+    end
+    object btn_salvar: TButton
+      Left = 115
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Salvar'
+      TabOrder = 2
+      OnClick = btn_salvarClick
+    end
+    object btn_cancelar: TButton
+      Left = 292
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Cancelar'
+      TabOrder = 3
+      OnClick = btn_cancelarClick
+    end
+  end
+  object edt_CodProduto: TLabeledEdit
+    Left = 24
+    Top = 32
+    Width = 121
+    Height = 21
+    EditLabel.Width = 11
+    EditLabel.Height = 13
+    EditLabel.Caption = 'ID'
+    TabOrder = 6
+  end
+end

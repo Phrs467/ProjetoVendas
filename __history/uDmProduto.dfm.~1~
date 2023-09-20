@@ -1,0 +1,5 @@
+object dmProduto: TdmProduto
+  OldCreateOrder = False
+  Height = 169
+  Width = 253
+end

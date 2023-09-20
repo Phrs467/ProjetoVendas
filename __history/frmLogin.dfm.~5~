@@ -1,0 +1,45 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Entrar no sistema'
+  ClientHeight = 222
+  ClientWidth = 336
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btnEntrar: TButton
+    Left = 128
+    Top = 136
+    Width = 75
+    Height = 25
+    Caption = 'Entrar'
+    TabOrder = 0
+  end
+  object edtUsuario: TLabeledEdit
+    Left = 104
+    Top = 48
+    Width = 121
+    Height = 21
+    EditLabel.Width = 36
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Usu'#225'rio'
+    TabOrder = 1
+  end
+  object edtSenha: TLabeledEdit
+    Left = 106
+    Top = 96
+    Width = 121
+    Height = 21
+    EditLabel.Width = 30
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Senha'
+    TabOrder = 2
+  end
+end

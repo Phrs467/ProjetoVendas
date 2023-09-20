@@ -1,0 +1,5 @@
+object dmUsuario: TdmUsuario
+  OldCreateOrder = False
+  Height = 416
+  Width = 481
+end

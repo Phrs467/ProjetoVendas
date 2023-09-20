@@ -1,0 +1,61 @@
+unit UProduto;
+
+interface
+
+type
+  TProduto = class
+  private
+    FCOD_PRODUTO : Integer;
+    FDESCCOMERCIAL : string;
+    FDESCCOMPRA : string;
+    FUNIDADE : string;
+    FVALOR : Double;
+    FQUANTIDADE : Double;
+  public
+    property COD_PRODUTO : Integer READ FCOD_PRODUTO WRITE FCOD_PRODUTO;
+    property DESCCOMERCIAL : string READ FDESCCOMERCIAL WRITE FDESCCOMERCIAL;
+    property DESCCOMPRA : string READ FDESCCOMPRA WRITE FDESCCOMPRA;
+    property UNIDADE : string READ FUNIDADE WRITE FUNIDADE;
+    property VALOR : Double READ FVALOR WRITE FVALOR;
+    property QUANTIDADE : Double READ FQUANTIDADE WRITE FQUANTIDADE;
+
+    Function Salvar : Boolean;
+    Function Editar : Boolean;
+    Function Excluir : Boolean;
+    Function Cancelar : Boolean;
+  end;
+
+implementation
+
+uses
+  uDmConexao, SysUtils;
+
+{ TProduto }
+
+function TProduto.Cancelar: Boolean;
+begin
+  uDmConexao.DataModule1.ADOQuery1.Cancel;
+end;
+
+function TProduto.Editar: Boolean;
+var
+  sqlEditar : string;
+begin
+
+end;
+
+function TProduto.Excluir: Boolean;
+var
+  sql : string;
+begin
+
+end;
+
+function TProduto.Salvar: Boolean;
+var
+  sqlSalvar, sqlCampos, sqlValues : string;
+begin
+
+end;
+
+end.

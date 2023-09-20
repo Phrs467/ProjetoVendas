@@ -1,0 +1,124 @@
+object DataModule1: TDataModule1
+  OldCreateOrder = False
+  Height = 362
+  Width = 737
+  object Conexao: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=saoba123;Persist Security Info=True' +
+      ';User ID=sa;Initial Catalog=FORCA_VENDAS;Data Source=DESENV5'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 32
+    Top = 40
+  end
+  object ADOQuery1: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    Left = 32
+    Top = 104
+  end
+  object qEstados: TADOQuery
+    Active = True
+    Connection = Conexao
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from UF')
+    Left = 112
+    Top = 40
+  end
+  object dsEstados: TDataSource
+    DataSet = qEstados
+    Left = 112
+    Top = 104
+  end
+  object DsPesqClientes: TDataSource
+    DataSet = qPesqClientes
+    Left = 216
+    Top = 48
+  end
+  object qPesqClientes: TADOQuery
+    Connection = Conexao
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    Parameters = <>
+    SQL.Strings = (
+      'select '
+      '  Cli.COD_CLIENTE,'
+      '  Cli.NOME_CLIENTE,'
+      '  Cli.IDADE,'
+      '  Cli.SEXO,'
+      '  uf.COD_UF,'
+      '  uf.SIGLA'
+      'from Clientes Cli'
+      'inner join UF uf on uf.COD_UF  = Cli.UF')
+    Left = 216
+    Top = 96
+    object qPesqClientesCOD_CLIENTE: TIntegerField
+      FieldName = 'COD_CLIENTE'
+    end
+    object qPesqClientesNOME_CLIENTE: TStringField
+      FieldName = 'NOME_CLIENTE'
+      Size = 45
+    end
+    object qPesqClientesIDADE: TIntegerField
+      FieldName = 'IDADE'
+    end
+    object qPesqClientesSEXO: TStringField
+      FieldName = 'SEXO'
+      Size = 1
+    end
+    object qPesqClientesCOD_UF: TIntegerField
+      FieldName = 'COD_UF'
+    end
+    object qPesqClientesSIGLA: TStringField
+      FieldName = 'SIGLA'
+      Size = 2
+    end
+  end
+  object DsPesqEstados: TDataSource
+    DataSet = qPesqEstados
+    Left = 304
+    Top = 48
+  end
+  object qPesqEstados: TADOQuery
+    Connection = Conexao
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    Parameters = <>
+    SQL.Strings = (
+      'select * from UF')
+    Left = 304
+    Top = 96
+    object qPesqEstadosCOD_UF: TIntegerField
+      FieldName = 'COD_UF'
+    end
+    object qPesqEstadosSIGLA: TStringField
+      FieldName = 'SIGLA'
+      Size = 2
+    end
+    object qPesqEstadosDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 50
+    end
+    object qPesqEstadosVL_ALIQ_UF: TFloatField
+      FieldName = 'VL_ALIQ_UF'
+    end
+  end
+  object DsPesqProduto: TDataSource
+    DataSet = qPesqProduto
+    Left = 392
+    Top = 48
+  end
+  object qPesqProduto: TADOQuery
+    Connection = Conexao
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Produto')
+    Left = 392
+    Top = 96
+  end
+end
