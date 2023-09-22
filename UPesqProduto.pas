@@ -103,7 +103,6 @@ begin
 
   if RgPesqProduto.ItemIndex = 1 then
     LblPesqProduto.Caption := 'Pesquisar por Descrição:'
-
 end;
 
 end.

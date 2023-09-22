@@ -4,8 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
-  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, uDmConexao, ULancPedido, UClientes;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB, DateUtils,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, uDmConexao, ULancPedido, UClientes,
+  Datasnap.DBClient;
 
 type
   TFrmPedidos = class(TForm)
@@ -27,19 +28,31 @@ type
     edt_Desconto: TLabeledEdit;
     edt_ValorPago: TLabeledEdit;
     edt_CodPedido: TLabeledEdit;
+    dsItens: TDataSource;
+    cdsItens: TClientDataSet;
+    GerarNumPedido: TSpeedButton;
+    cdsItensCOD_ITEM_PED: TIntegerField;
+    cdsItensCOD_PROD: TIntegerField;
+    cdsItensDS_PRODUTO: TStringField;
+    cdsItensVALOR_VENDA: TFloatField;
+    cdsItensCOD_PEDIDO: TIntegerField;
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_incluirClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
     procedure edt_DescontoExit(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure GerarNumPedidoClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     LancPedido : TLancPedido;
-    Clientes : TCadClientes;
+    CadClientes : TCadClientes;
 
     procedure LimparForm;
+    Procedure PesquisarId;
 
+    Function GerarPedido : String;
   public
     { Public declarations }
     Procedure Usuario;
@@ -50,7 +63,7 @@ var
 
 implementation
 
-uses frmPesquisaGeral, uDmUsuario;
+uses frmPesquisaGeral, uDmUsuario, UPesqClientes;
 
 {$R *.dfm}
 
@@ -122,7 +135,6 @@ begin
   LancPedido.Free;
 end;
 
-
 procedure TFrmPedidos.edt_DescontoExit(Sender: TObject);
 var
   ValorPago,Desconto, ValorTotal : Double;
@@ -132,6 +144,66 @@ begin
 
   ValorPago := ValorTotal - Desconto;
   edt_ValorPago.Text := FormatFloat('#0.00', ValorPago);
+end;
+
+procedure TFrmPedidos.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  LimparForm;
+end;
+
+procedure TFrmPedidos.GerarNumPedidoClick(Sender: TObject);
+begin
+  if edt_NumPedido.Text = '' then
+  begin
+    edt_NumPedido.Text := GerarPedido;
+  end
+  else
+  begin
+    if Application.MessageBox('Você deseja sobreescrever o número de pedido atual? ','Aviso',
+    MB_ICONQUESTION+MB_YESNO) = mrYes then
+    begin
+      edt_NumPedido.Text := GerarPedido;
+    end
+    else
+      Exit;
+  end;
+
+  edt_Vendedor.Text := dmUsuario.Usuario_Logado;
+end;
+
+function TFrmPedidos.GerarPedido: String;
+var
+  AnoAtual, MesAtual: Integer;
+  NumeroAleatorio: string;
+  Matricula: string;
+  NumeroJaUsado: TStringList;
+  Index: Integer; // Variável para armazenar o índice
+begin
+  AnoAtual := YearOf(Date);
+  MesAtual := MonthOf(Date); // Obter o mês atual
+
+  Randomize;
+  NumeroJaUsado := TStringList.Create;
+  try
+    repeat
+      // Gerar um número aleatório de 6 dígitos
+      NumeroAleatorio := Format('%.4d', [Random(10000)]);
+
+      // Montar a matrícula com o ano atual, mês e o número aleatório
+      Matricula := Format('%.4d%.2d%s', [AnoAtual, MesAtual, NumeroAleatorio]);
+
+      // Usar o método Find para verificar se a matrícula já foi usada
+      Index := NumeroJaUsado.IndexOf(Matricula);
+
+    until Index = -1;
+
+    // Adicionar a matrícula à lista de números já usados
+    NumeroJaUsado.Add(Matricula);
+  finally
+    NumeroJaUsado.Free;
+  end;
+
+  Result := Matricula;
 end;
 
 procedure TFrmPedidos.LimparForm;
@@ -146,30 +218,55 @@ begin
 end;
 
 
-procedure TFrmPedidos.SpeedButton1Click(Sender: TObject);
+procedure TFrmPedidos.PesquisarId;
 begin
   if edt_CodCliente.Text <> '' then
   begin
-    DataModule1.ADOQuery1.SQL.Text :=
-    'select                                     '+
-    'cli.NOME_CLIENTE                           '+
-    'from Clientes Cli                          '+
-    'where Cli.COD_CLIENTE = :COD_CLIENTE       ';
+    CadClientes := TCadClientes.Create;
+    CadClientes.COD_CLIENTE := StrToInt(edt_CodCliente.Text);
 
-    DataModule1.ADOQuery1.Parameters.ParamByName('COD_CLIENTE').Value := StrToInt(edt_CodCliente.Text);
-    DataModule1.ADOQuery1.Open;
-
-    if not DataModule1.ADOQuery1.IsEmpty then
-      edt_NomeCliente.Text := DataModule1.ADOQuery1.FieldByName('NOME_CLIENTE').AsString
+    if CadClientes.PesquisarId then
+    begin
+      edt_CodCliente.Text := IntToStr(CadClientes.COD_CLIENTE);
+      edt_NomeCliente.Text := CadClientes.NOME_CLIENTE;
+    end
     else
       ShowMessage('Cliente não encontrado');
 
   end;
 end;
 
+procedure TFrmPedidos.SpeedButton1Click(Sender: TObject);
+begin
+  FormPesqClientes.ShowModal;
+
+  if FormPesqClientes.FrmIdCliente > 0 then
+  begin
+    edt_CodCliente.Text := IntToStr(FormPesqClientes.FrmIdCliente);
+    PesquisarId;
+  end;
+
+//  if edt_CodCliente.Text <> '' then
+//  begin
+//    DataModule1.ADOQuery1.SQL.Text :=
+//    'select                                     '+
+//    'cli.NOME_CLIENTE                           '+
+//    'from Clientes Cli                          '+
+//    'where Cli.COD_CLIENTE = :COD_CLIENTE       ';
+//
+//    DataModule1.ADOQuery1.Parameters.ParamByName('COD_CLIENTE').Value := StrToInt(edt_CodCliente.Text);
+//    DataModule1.ADOQuery1.Open;
+//
+//    if not DataModule1.ADOQuery1.IsEmpty then
+//      edt_NomeCliente.Text := DataModule1.ADOQuery1.FieldByName('NOME_CLIENTE').AsString
+//    else
+//      ShowMessage('Cliente não encontrado');
+//  end;
+end;
+
 procedure TFrmPedidos.Usuario;
 begin
-  edt_Vendedor.Text := dmUsuario.Usuario_Logado;
+
 end;
 
 end.

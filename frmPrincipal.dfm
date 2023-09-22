@@ -71,13 +71,13 @@ object frmMenuSistema: TfrmMenuSistema
         Caption = 'Clientes'
         OnClick = Clientes2Click
       end
-      object Estados2: TMenuItem
-        Caption = 'Estados'
-        OnClick = Estados2Click
-      end
       object Pesquisar1: TMenuItem
         Caption = 'Produto'
         OnClick = Pesquisar1Click
+      end
+      object Estados2: TMenuItem
+        Caption = 'Estados'
+        OnClick = Estados2Click
       end
     end
     object Vendas1: TMenuItem
