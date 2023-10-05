@@ -2,7 +2,7 @@ object FrmPedidos: TFrmPedidos
   Left = 0
   Top = 0
   Caption = 'Lan'#231'amento de Pedidos'
-  ClientHeight = 430
+  ClientHeight = 449
   ClientWidth = 853
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -164,11 +164,12 @@ object FrmPedidos: TFrmPedidos
   end
   object Panel1: TPanel
     Left = 0
-    Top = 389
+    Top = 408
     Width = 853
     Height = 41
     Align = alBottom
     TabOrder = 0
+    ExplicitTop = 389
     object btn_excluir: TButton
       Left = 203
       Top = 8
@@ -218,12 +219,13 @@ object FrmPedidos: TFrmPedidos
     Left = 0
     Top = 97
     Width = 853
-    Height = 292
+    Height = 311
     Align = alClient
     Caption = 'Itens do Pedido'
     TabOrder = 2
     ExplicitLeft = 24
     ExplicitTop = 99
+    ExplicitHeight = 292
     object DBGrid1: TDBGrid
       Left = 9
       Top = 16
@@ -268,6 +270,15 @@ object FrmPedidos: TFrmPedidos
       EditLabel.Caption = 'Valor Pago'
       TabOrder = 3
     end
+    object Btn_AdicionaProd: TButton
+      Left = 9
+      Top = 269
+      Width = 75
+      Height = 25
+      Caption = 'Adicionar'
+      TabOrder = 4
+      OnClick = Btn_AdicionaProdClick
+    end
   end
   object dsItens: TDataSource
     DataSet = cdsItens
@@ -275,26 +286,33 @@ object FrmPedidos: TFrmPedidos
     Top = 113
   end
   object cdsItens: TClientDataSet
+    PersistDataPacket.Data = {
+      860000009619E0BD01000000180000000500000000000300000086000C434F44
+      5F4954454D5F504544040001000000000008434F445F50524F44040001000000
+      00000A44535F50524F4455544F01004900000001000557494454480200020032
+      000B56414C4F525F56454E444108000400000000000A434F445F50454449444F
+      04000100000000000000}
+    Active = True
     Aggregates = <>
     Params = <>
     Left = 800
     Top = 113
     object cdsItensCOD_ITEM_PED: TIntegerField
-      DisplayLabel = 'SEQ.'
+      DisplayLabel = 'Id'
       FieldName = 'COD_ITEM_PED'
     end
     object cdsItensCOD_PROD: TIntegerField
+      DisplayLabel = 'Cod. Produto'
       FieldName = 'COD_PROD'
     end
     object cdsItensDS_PRODUTO: TStringField
+      DisplayLabel = 'Descri'#231#227'o'
       FieldName = 'DS_PRODUTO'
       Size = 50
     end
     object cdsItensVALOR_VENDA: TFloatField
+      DisplayLabel = 'Valor de Venda'
       FieldName = 'VALOR_VENDA'
-    end
-    object cdsItensCOD_PEDIDO: TIntegerField
-      FieldName = 'COD_PEDIDO'
     end
   end
 end

@@ -35,7 +35,7 @@ type
     cdsItensCOD_PROD: TIntegerField;
     cdsItensDS_PRODUTO: TStringField;
     cdsItensVALOR_VENDA: TFloatField;
-    Btn_AdicionaProd: TButton;
+    cdsItensCOD_PEDIDO: TIntegerField;
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_incluirClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
@@ -44,7 +44,6 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure GerarNumPedidoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Btn_AdicionaProdClick(Sender: TObject);
   private
     { Private declarations }
     LancPedido : TLancPedido;
@@ -72,11 +71,6 @@ uses frmPesquisaGeral, uDmUsuario, UPesqClientes;
 
 
 
-procedure TFrmPedidos.Btn_AdicionaProdClick(Sender: TObject);
-begin
-
-end;
-
 procedure TFrmPedidos.btn_cancelarClick(Sender: TObject);
 begin
   LancPedido := TLancPedido.Create;
@@ -93,7 +87,7 @@ begin
 
   LancPedido.COD_PEDIDO := StrToInt(edt_CodPedido.Text);
 
-  if Application.MessageBox('VocÃª deseja excluir o registro? ', 'Aviso',
+  if Application.MessageBox('Você deseja excluir o registro? ', 'Aviso',
     MB_ICONQUESTION+MB_YESNO) = mrYes then
   begin
     LancPedido.Excluir;
@@ -109,7 +103,7 @@ procedure TFrmPedidos.btn_incluirClick(Sender: TObject);
 begin
     if (edt_NumPedido.Text <> '') or (edt_CodCliente.Text <> '') or (edt_NomeCliente.Text <> '') then
   begin
-    if Application.MessageBox('VocÃª deseja incluir um novo registro? as alteraÃ§Ãµes realizadas caso nÃ£o salvar serÃ£o perdidas!',
+    if Application.MessageBox('Você deseja incluir um novo registro? as alterações realizadas caso não salvar serão perdidas!',
     'Aviso', MB_ICONQUESTION+MB_YESNO) = mrNo then
     exit;
   end;
@@ -165,7 +159,7 @@ begin
   end
   else
   begin
-    if Application.MessageBox('VocÃª deseja sobreescrever o nÃºmero de pedido atual? ','Aviso',
+    if Application.MessageBox('Você deseja sobreescrever o número de pedido atual? ','Aviso',
     MB_ICONQUESTION+MB_YESNO) = mrYes then
     begin
       edt_NumPedido.Text := GerarPedido;
@@ -183,27 +177,27 @@ var
   NumeroAleatorio: string;
   Matricula: string;
   NumeroJaUsado: TStringList;
-  Index: Integer; // VariÃ¡vel para armazenar o Ã­ndice
+  Index: Integer; // Variável para armazenar o índice
 begin
   AnoAtual := YearOf(Date);
-  MesAtual := MonthOf(Date); // Obter o mÃªs atual
+  MesAtual := MonthOf(Date); // Obter o mês atual
 
   Randomize;
   NumeroJaUsado := TStringList.Create;
   try
     repeat
-      // Gerar um nÃºmero aleatÃ³rio de 6 dÃ­gitos
+      // Gerar um número aleatório de 6 dígitos
       NumeroAleatorio := Format('%.4d', [Random(10000)]);
 
-      // Montar a matrÃ­cula com o ano atual, mÃªs e o nÃºmero aleatÃ³rio
+      // Montar a matrícula com o ano atual, mês e o número aleatório
       Matricula := Format('%.4d%.2d%s', [AnoAtual, MesAtual, NumeroAleatorio]);
 
-      // Usar o mÃ©todo Find para verificar se a matrÃ­cula jÃ¡ foi usada
+      // Usar o método Find para verificar se a matrícula já foi usada
       Index := NumeroJaUsado.IndexOf(Matricula);
 
     until Index = -1;
 
-    // Adicionar a matrÃ­cula Ã  lista de nÃºmeros jÃ¡ usados
+    // Adicionar a matrícula à lista de números já usados
     NumeroJaUsado.Add(Matricula);
   finally
     NumeroJaUsado.Free;
@@ -237,7 +231,7 @@ begin
       edt_NomeCliente.Text := CadClientes.NOME_CLIENTE;
     end
     else
-      ShowMessage('Cliente nÃ£o encontrado');
+      ShowMessage('Cliente não encontrado');
 
   end;
 end;
@@ -266,7 +260,7 @@ begin
 //    if not DataModule1.ADOQuery1.IsEmpty then
 //      edt_NomeCliente.Text := DataModule1.ADOQuery1.FieldByName('NOME_CLIENTE').AsString
 //    else
-//      ShowMessage('Cliente nÃ£o encontrado');
+//      ShowMessage('Cliente não encontrado');
 //  end;
 end;
 

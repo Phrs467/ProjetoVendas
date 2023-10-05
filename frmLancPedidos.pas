@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB, DateUtils,
-  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, uDmConexao, ULancPedido, UClientes,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, uDmConexao, ULancPedido, UClientes, UPesqProduto,
   Datasnap.DBClient;
 
 type
@@ -35,7 +35,7 @@ type
     cdsItensCOD_PROD: TIntegerField;
     cdsItensDS_PRODUTO: TStringField;
     cdsItensVALOR_VENDA: TFloatField;
-    cdsItensCOD_PEDIDO: TIntegerField;
+    Btn_AdicionaProd: TButton;
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_incluirClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
@@ -44,6 +44,7 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure GerarNumPedidoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Btn_AdicionaProdClick(Sender: TObject);
   private
     { Private declarations }
     LancPedido : TLancPedido;
@@ -70,6 +71,11 @@ uses frmPesquisaGeral, uDmUsuario, UPesqClientes;
 { TFrmPedidos }
 
 
+
+procedure TFrmPedidos.Btn_AdicionaProdClick(Sender: TObject);
+begin
+  FormPesqProduto.ShowModal;
+end;
 
 procedure TFrmPedidos.btn_cancelarClick(Sender: TObject);
 begin
