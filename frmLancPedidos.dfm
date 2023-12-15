@@ -169,7 +169,6 @@ object FrmPedidos: TFrmPedidos
     Height = 41
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 389
     object btn_excluir: TButton
       Left = 203
       Top = 8
@@ -223,9 +222,6 @@ object FrmPedidos: TFrmPedidos
     Align = alClient
     Caption = 'Itens do Pedido'
     TabOrder = 2
-    ExplicitLeft = 24
-    ExplicitTop = 99
-    ExplicitHeight = 292
     object DBGrid1: TDBGrid
       Left = 9
       Top = 16

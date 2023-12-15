@@ -70,7 +70,8 @@ uses frmPesquisaGeral, uDmUsuario, UPesqClientes;
 
 { TFrmPedidos }
 
-
+var
+  Tipo : string;
 
 procedure TFrmPedidos.Btn_AdicionaProdClick(Sender: TObject);
 begin

@@ -48,6 +48,9 @@ uses
 
 {$R *.dfm}
 
+var
+  Tipo1 : string;
+
 procedure TfrmCadProduto.btn_cancelarClick(Sender: TObject);
 begin
   Produto := TProduto.Create;

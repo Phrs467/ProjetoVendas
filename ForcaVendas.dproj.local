@@ -25,10 +25,10 @@
     <Transaction>2023/09/04 11:10:52.000.658,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\UPesqClientes.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit3.dfm</Transaction>
     <Transaction>2023/09/04 14:02:41.000.881,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\UPesqEstados.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit3.dfm</Transaction>
     <Transaction>2023/09/05 08:09:54.000.655,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\UPesqProduto.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit3.dfm</Transaction>
-    <Transaction>2023/09/20 11:18:43.430,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmUsuario.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
-    <Transaction>2023/09/20 11:22:13.852,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmClientes.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
-    <Transaction>2023/09/20 11:31:46.211,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmEstados.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
-    <Transaction>2023/09/20 11:33:52.450,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmProduto.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/09/20 11:18:43.000.430,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmUsuario.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/09/20 11:22:13.000.852,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmClientes.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/09/20 11:31:46.000.211,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmEstados.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
+    <Transaction>2023/09/20 11:33:52.000.450,D:\Unifan\Projetos de teste\Projeto Venda - Udemy\uDmProduto.dfm=D:\Unifan\Projetos de teste\Projeto Venda - Udemy\Unit1.dfm</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="frmCadClientes.pas"/>
